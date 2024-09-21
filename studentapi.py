@@ -23,7 +23,7 @@ def addstudent(**kwargs)->None:
     
 def findstudent(**kwargs)->None:
     global index
-    keys = list(kwargs.keys()) #return the keys of the kwargs
+    keys = list(kwargs.keys()) 
     values = list(kwargs.values())
     for student in slist:
         if student[keys[0]] == values[0]:
@@ -32,12 +32,12 @@ def findstudent(**kwargs)->None:
     return None
     
 def displayall()->None:
-    system('cls')  # Consider making this OS-specific for compatibility
+    system('cls')  
     if len(slist) == 0:
         print("No students available.")
         return
     
-    header:list = list(slist[0].keys())  # If slist is empty, this will raise an error
+    header:list = list(slist[0].keys()) 
     print("-"*100)
     print("PRICE LIST".center(100))
     print("-"*100)
