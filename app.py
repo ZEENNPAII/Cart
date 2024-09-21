@@ -30,6 +30,7 @@ def add() -> None:
     if item:
         print(f"Description: {item['DESCRIPTION']}, Price: {item['PRICE']}")
         try:
+            print('-' * 5 + '--------------' + '-' * 15)
             qty = int(input("Enter quantity: "))
             if qty > 0:
                 # Append to the global CART list
@@ -48,11 +49,16 @@ def display_cart() -> None:
         print("Your cart is empty.")
     else:
         print(f"{'ITEMCODE':<10} {'DESCRIPTION':<25} {'QUANTITY':<10} {'PRICE':<10}")
-        print("-" * 50)
+        print("-" * 60)
+        total_amount = 0.0  # Initialize total amount
         for item in CART:
             total_price = float(item['PRICE']) * item['QUANTITY']
             print(f"{item['ITEMCODE']:<10} {item['DESCRIPTION']:<25} {item['QUANTITY']:<10} {total_price:<10.2f}")
-        print("-" * 50)
+            total_amount += total_price  # Add item total price to total amount
+        print("-" * 60)
+        print(f"                                         total: {total_amount:.2f}")  # Display the total amount
+
+
 
 def find_items() -> None:  # Function to display available items
     header('AVAILABLE ITEMS')
@@ -60,12 +66,12 @@ def find_items() -> None:  # Function to display available items
         print("No items available.")
     else:
         print(f"{'ITEMCODE':<10} {'DESCRIPTION':<25} {'PRICE':<10}")
-        print("-" * 50)
+        print("-" * 60)
         for item in BUY:
             print(f"{item['ITEMCODE']:<10} {item['DESCRIPTION']:<25} {item['PRICE']:<10}")
-        print("-" * 50)
+        print("-" * 60)
 
-def display_menu() -> None:
+def displaymenu() -> None:
     system('cls')
     print('-' * 5 + 'Main Menu' + '-' * 5)
     print('1. BUY')
@@ -74,13 +80,24 @@ def display_menu() -> None:
     print('0. Quit/End')
     print('-' * 21)
 
+# def displaymenu()->None:
+    # system('cls')
+    # print('-'*5+'Main Menu'+'-'*5)
+    # print('1. Add Student') # BUY
+    # print('2. Find Student') #SHOW CART
+    # print('3. Update Student')
+    # print('4. Delete Student')
+    # print('5. Display All Student') #SHOW ITEMS
+    # print('0. Quit/End')
+    # print('-'*21)    
+
 def terminate() -> None: 
     print('Program Ends')
 
 def main() -> None:
     option:int = -1
     while option != 0:
-        display_menu()
+        displaymenu()
         try:
             option = int(input('Enter Option (0..3): '))
             match option:
