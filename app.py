@@ -24,14 +24,14 @@ def find(item_code: str) -> dict:
 def add() -> None:
     global ITEMCODE
     header('BUY')
-    ITEMCODE = input("Enter ITEMCODE: ")
+    ITEMCODE = input("ITEMCODE   : ")
     
     item = find(ITEMCODE)
     if item:
         print(f"Description: {item['DESCRIPTION']} ")
-        print(f"Price: {item['PRICE']} ")
+        print(f"Price      : {item['PRICE']} ")
         try:
-            qty = int(input("QTY: "))
+            qty = int(input("QTY        : "))
             if qty > 0:
                 # Append to the global CART list
                 CART.append({ 'ITEMCODE': ITEMCODE, 'DESCRIPTION': item['DESCRIPTION'], 'PRICE': item['PRICE'], 'QUANTITY': qty })
@@ -47,24 +47,31 @@ def add() -> None:
         print("Item not found!")
 
 def display_cart() -> None:
-    header('CART CONTENT')
+    header('Show Cart')
     if not CART:
-        print("Your cart iDs empty.")
+        print("Your cart is empty.")
     else:
-        print(f"{'ITEMCODE':<10} {'DESCRIPTION':<25} {'QUANTITY':<10} {'PRICE':<10}")
+        
+        print(f"{'#':<1} {'ITEMCODE':<10} {'DESCRIPTION':<15} {'PRICE':<10} {'QTY':<10} {'TOTAL':<10}")
         print("-" * 60)
         total_amount = 0.0  # Initialize total amount
+        total_items = 0 
+        
+        
+        
+        
         for item in CART:
+            total_items += item['QUANTITY']
             total_price = float(item['PRICE']) * item['QUANTITY']
-            print(f"{item['ITEMCODE']:<10} {item['DESCRIPTION']:<25} {item['QUANTITY']:<10} {total_price:<10.2f}")
+            print(f"{item['ITEMCODE']:<10} {item['DESCRIPTION']:<15} {item['PRICE']:<10} {item['QUANTITY']:<10} {total_price:<10.2f}")
             total_amount += total_price  # Add item total price to total amount
         print("-" * 60)
-        print(f"                                         total: {total_amount:.2f}")  # Display the total amount
+        print(f"                                            total: {total_amount:.2f}")  # Display the total amount
 
 
 
 def find_items() -> None:  # Function to display available items
-    header('AVAILABLE ITEMS')
+    header('Show items')
     if len(BUY) == 0:
         print("No items available.")
     else:
