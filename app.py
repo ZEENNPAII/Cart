@@ -23,19 +23,22 @@ def find(item_code: str) -> dict:
         
 def add() -> None:
     global ITEMCODE
-    header('BUY ITEM')
+    header('BUY')
     ITEMCODE = input("Enter ITEMCODE: ")
     
     item = find(ITEMCODE)
     if item:
-        print(f"Description: {item['DESCRIPTION']}, Price: {item['PRICE']}")
+        print(f"Description: {item['DESCRIPTION']} ")
+        print(f"Price: {item['PRICE']} ")
         try:
-            print('-' * 5 + '--------------' + '-' * 15)
-            qty = int(input("Enter quantity: "))
+            qty = int(input("QTY: "))
             if qty > 0:
                 # Append to the global CART list
-                CART.append({'ITEMCODE': ITEMCODE, 'DESCRIPTION': item['DESCRIPTION'], 'PRICE': item['PRICE'], 'QUANTITY': qty})
-                print(f"{qty} of {item['DESCRIPTION']} added to cart.")
+                CART.append({ 'ITEMCODE': ITEMCODE, 'DESCRIPTION': item['DESCRIPTION'], 'PRICE': item['PRICE'], 'QUANTITY': qty })
+                print("-" * 20)
+                #print(f"{qty} of {item['DESCRIPTION']} added to cart.")               
+                total_price = float(item['PRICE']) * qty
+                print(f"Total price: {total_price:.2f}")              
             else:
                 print("Quantity must be greater than zero.")
         except ValueError:
@@ -46,7 +49,7 @@ def add() -> None:
 def display_cart() -> None:
     header('CART CONTENT')
     if not CART:
-        print("Your cart is empty.")
+        print("Your cart iDs empty.")
     else:
         print(f"{'ITEMCODE':<10} {'DESCRIPTION':<25} {'QUANTITY':<10} {'PRICE':<10}")
         print("-" * 60)
