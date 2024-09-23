@@ -6,7 +6,7 @@ from data import BUY
 ITEMCODE:str = ""
 DESCRIPTION:str = ""
 PRICE:str = ""
-CART:list = []  #  hold cart items
+CART:list = []  # List to hold cart items
 
 def header(message) -> None:
     system('cls')
@@ -33,12 +33,12 @@ def add() -> None:
         try:
             qty = int(input("QTY        : "))
             if qty > 0:
-                
+                # Append to the global CART list
                 CART.append({ 'ITEMCODE': ITEMCODE, 'DESCRIPTION': item['DESCRIPTION'], 'PRICE': item['PRICE'], 'QUANTITY': qty })
                 print("-" * 20)
                 #print(f"{qty} of {item['DESCRIPTION']} added to cart.")               
                 total_price = float(item['PRICE']) * qty
-                print(f"Total price: {total_price:.2f}")              
+                print(f"Total      : {total_price:.2f}")              
             else:
                 print("Quantity must be greater than zero.")
         except ValueError:
@@ -54,7 +54,7 @@ def display_cart() -> None:
         
         print(f"{'#':<1} {'ITEMCODE':<10} {'DESCRIPTION':<15} {'PRICE':<10} {'QTY':<10} {'TOTAL':<10}")
         print("-" * 60)
-        total_amount = 0.0  
+        total_amount = 0.0  # Initialize total amount
         total_items = 0 
         total_count = 1
         
@@ -68,11 +68,11 @@ def display_cart() -> None:
             total_amount += total_price  # Add item total price to total amount
             total_count += 1
         print("-" * 60)
-        print(f"                                            total: {total_amount:.2f}")  
+        print(f"                                            total: {total_amount:.2f}")  # Display the total amount
 
 
 
-def find_items() -> None:  
+def find_items() -> None:  # Function to display available items
     header('Show items')
     if len(BUY) == 0:
         print("No items available.")
